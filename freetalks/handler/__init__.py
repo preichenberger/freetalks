@@ -1,6 +1,6 @@
-import webapp2
+from freetalks import web
 
-class Home(webapp2.RequestHandler):
+class Home(web.Handler):
 
     def get(self):
-        self.response.out.write('Freetalks')
+        self.render('simple.html', content='Welcome to Freetalks')
