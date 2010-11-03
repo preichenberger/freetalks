@@ -21,7 +21,7 @@
   </head>
 
   <body id="{% block body-id %}base{% endblock %}">
-{% block body %}{% endblock %}
+{% block body %}{{ content }}{% endblock %}
   </body>
 </html>
 {% endspaceless %}
