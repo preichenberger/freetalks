@@ -1,1 +1,1 @@
-from freetalks.handler import general, video
+from freetalks.handler import general, talk
