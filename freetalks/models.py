@@ -10,7 +10,7 @@ class BaseModel(object):
     updated_date = db.DateTimeProperty(auto_now=True)
 
 class Series(db.Model, BaseModel):
-    parent = db.ReferenceProperty(Series, required=False)
+    parent = db.SelfReferenceProperty(required=False)
     name = db.StringProperty()
     slug = db.StringProperty()
     link = db.LinkProperty(required=False)
