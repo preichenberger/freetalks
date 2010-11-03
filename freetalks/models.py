@@ -1,4 +1,5 @@
 from google.appengine.ext import db
+from freetalks.utils import video
 
 SOURCE_CHOICES = set(['blip.tv', 'ted', 'vimeo', 'youtube'])
 
@@ -27,3 +28,7 @@ class Talk(db.Model, BaseModel):
     source_link_id = db.StringProperty()
     source_media_id = db.StringProperty()
     source_posted_date = db.DateTimeProperty()
+
+    @property
+    def source(self):
+        return video.get(self.source_type, self.source_media_id, self.source_link_id)
