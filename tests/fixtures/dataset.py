@@ -1,25 +1,33 @@
 from google.appengine.ext import db
+from google.appengine.api.users import User
 from freetalks.models import Series
 from freetalks.models import Talk
 import datetime
 
 def clear():
     talks = Talk.all()
-    series = Series.all()
-    
-    db.delete(talks)
-    db.delete(series)
+    series_list = Series.all()
+   
+    for talk in talks:
+        talk.delete()
+
+    for series in series_list:
+        series.delete()
 
 def setup():
+    test_user = User(email="test@freetalks.com")
+
     series_list = []
     pycon_series = Series(name="PyCon",
                     slug="python_slug",
-                    link="http://pycon.org/")
+                    link="http://pycon.org/",
+                    created_user=test_user,
+                    updated_user=test_user)
 
     series_list.append(pycon_series)
 
     for series in series_list:
-        db.put(series)
+        series.put()
 
     talks = []
 
@@ -33,6 +41,8 @@ def setup():
                             source_link_id='3264001',
                             source_media_id='3264001',
                             source_posted_date=datetime.datetime(2010, 2, 21),
+                            created_user=test_user,
+                            updated_user=test_user,
                             series=pycon_series))
 
     talks.append(Talk(title="Aaron Huey: America's native prisoners of war",
@@ -45,6 +55,8 @@ def setup():
                             source_link_id='aaron_huey',
                             source_media_id='AaronHuey_2010X-medium.flv',
                             source_posted_date=datetime.datetime(2010, 9, 1),
+                            created_user=test_user,
+                            updated_user=test_user,
                             series=pycon_series)) 
 
     talks.append(Talk(title="Python vs. Ruby: A Battle to The Death",
@@ -57,6 +69,8 @@ def setup():
                             source_link_id='9471538',
                             source_media_id='9471538',
                             source_posted_date=datetime.datetime(2010, 2, 1),
+                            created_user=test_user,
+                            updated_user=test_user,
                             series=pycon_series))
 
     talks.append(Talk(title="Google Developers Day US - Python Design Patterns",
@@ -69,7 +83,9 @@ def setup():
                             source_link_id='0vJJlVBVTFg',
                             source_media_id='0vJJlVBVTFg',
                             source_posted_date=datetime.datetime(2007, 6, 4),
+                            created_user=test_user,
+                            updated_user=test_user,
                             series=pycon_series)) 
 
     for talk in talks:
-        db.put(talk)
+        talk.put()
