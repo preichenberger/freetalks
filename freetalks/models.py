@@ -3,20 +3,18 @@ from freetalks.utils import video
 
 SOURCE_CHOICES = set(['blip.tv', 'ted', 'vimeo', 'youtube'])
 
-class BaseModel(object):
-    created_user = db.UserProperty(required=True)
-    updated_user = db.UserProperty(required=True)
-    created_date = db.DateTimeProperty(auto_now_add=True)
-    updated_date = db.DateTimeProperty(auto_now=True)
-
-class Series(db.Model, BaseModel):
+class Series(db.Model):
     parent_series = db.SelfReferenceProperty(required=False)
     name = db.StringProperty()
     slug = db.StringProperty()
     link = db.LinkProperty(required=False)
     about = db.TextProperty()
+    created_user = db.UserProperty(required=True)
+    updated_user = db.UserProperty(required=True)
+    created_date = db.DateTimeProperty(auto_now_add=True)
+    updated_date = db.DateTimeProperty(auto_now=True)
 
-class Talk(db.Model, BaseModel):
+class Talk(db.Model):
     title = db.StringProperty(required=True)
     summary = db.TextProperty()
     link = db.LinkProperty()
@@ -28,6 +26,10 @@ class Talk(db.Model, BaseModel):
     source_link_id = db.StringProperty()
     source_media_id = db.StringProperty()
     source_posted_date = db.DateTimeProperty()
+    created_user = db.UserProperty(required=True)
+    updated_user = db.UserProperty(required=True)
+    created_date = db.DateTimeProperty(auto_now_add=True)
+    updated_date = db.DateTimeProperty(auto_now=True)
 
     @property
     def source(self):
