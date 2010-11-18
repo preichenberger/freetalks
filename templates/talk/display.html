@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block head-title %}{{ talk.title }} - {{ block.super }}{% endblock %}
 {% block head-description %}{{ talk.summary }}{% endblock %}
 
 {% block content %}

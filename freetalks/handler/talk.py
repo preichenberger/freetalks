@@ -3,6 +3,12 @@ from freetalks import models
 from freetalks.utils import shortcuts
 from freetalks import web
 
+class List(web.Handler):
+
+    def get(self):
+        talk_list = models.Talk.all()
+        self.render('talk/index.html', talk_list=talk_list)
+
 class Display(web.Handler):
 
     def get(self, id):
