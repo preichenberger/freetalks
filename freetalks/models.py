@@ -5,7 +5,7 @@ SOURCE_CHOICES = set(['blip.tv', 'ted', 'vimeo', 'youtube'])
 
 class Series(db.Model):
     parent_series = db.SelfReferenceProperty(required=False)
-    name = db.StringProperty()
+    name = db.StringProperty(required=True)
     slug = db.StringProperty()
     link = db.LinkProperty(required=False)
     about = db.TextProperty()
