@@ -15,20 +15,13 @@ def clear():
 def setup():
     test_user = User(email='test@freetalks.com')
 
-    parent_pycon_series = models.Series(
-        name='Parent PyCon',
-        slug='parent-python-slug',
-        link='http://pycon.org/',
-        created_user=test_user,
-        updated_user=test_user,
-    ).put()
     pycon_series = models.Series(
         name='PyCon',
         slug='python-slug',
         link='http://pycon.org/',
+        about='A series of PyCon talks',
         created_user=test_user,
         updated_user=test_user,
-        parent=parent_pycon_series,
     ).put()
 
     models.Talk(
@@ -41,6 +34,7 @@ def setup():
         source_link_id='3264001',
         source_media_id='AYHItEYC',
         source_posted_date=datetime.datetime(2010, 2, 21),
+        summary='Intro to PyCon 2010',
         created_user=test_user,
         updated_user=test_user,
         series=pycon_series,
@@ -54,6 +48,7 @@ def setup():
         source_link_id='aaron_huey',
         source_media_id='AaronHuey_2010X',
         source_posted_date=datetime.datetime(2010, 9, 1),
+        summary='A discussion on America and prisoners of war',
         created_user=test_user,
         updated_user=test_user,
         series=pycon_series,
@@ -66,6 +61,7 @@ def setup():
         source_type='vimeo',
         source_link_id='9471538',
         source_media_id='9471538',
+        summary='Noob fest',
         source_posted_date=datetime.datetime(2010, 2, 1),
         created_user=test_user,
         updated_user=test_user,
@@ -79,6 +75,7 @@ def setup():
         source_type='youtube',
         source_link_id='0vJJlVBVTFg',
         source_media_id='0vJJlVBVTFg',
+        summary='Python has some patterns for design',
         source_posted_date=datetime.datetime(2007, 6, 4),
         created_user=test_user,
         updated_user=test_user,
