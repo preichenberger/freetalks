@@ -6,6 +6,10 @@ TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), '..', 'templates')
 
 class Handler(webapp2.RequestHandler):
 
+    def set_404(self, template='404.html', **kwargs):
+        self.error(404)
+        self.render(template, **kwargs)
+
     def render(self, path, **kwargs):
         self.response.out.write(
             template.render(
