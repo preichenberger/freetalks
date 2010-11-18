@@ -47,16 +47,32 @@ class Vimeo(Source):
     @property
     def embed(self):
         return '<iframe src="http://player.vimeo.com/video/%s" width="480" height="270" frameborder="0"></iframe>' \
-        % (self.media_id)
+        % self.media_id
 
     @property
     def link(self):
         return 'http://vimeo.com/%s' % self.link_id
 
+class YouTube(Source):
+
+    @property
+    def embed(self):
+        return '<object width="640" height="385">' \
+               '<param name="movie" value="http://www.youtube.com/v/%s?fs=1&amp;hl=en_US"></param>' \
+               '<param name="allowFullScreen" value="true"></param>' \
+               '<param name="allowscriptaccess" value="always"></param>' \
+               '<embed src="http://www.youtube.com/v/%s?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed>' \
+               '</object>' % (self.media_id, self.media_id)
+
+    @property
+    def link(self):
+        return 'http://www.youtube.com/watch?v=%s' % self.link_id
+
 map = {
     'blip.tv': BlipTv,
     'ted': Ted,
     'vimeo': Vimeo,
+    'youtube': YouTube,
 }
 
 def get(type_, media_id, link_id=None):
