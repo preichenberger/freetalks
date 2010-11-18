@@ -2,7 +2,7 @@
 
 {% block content %}
   <h2>{{ series.name }}</h2>
-  {% if series.about %}<p id="about">{{ series.about }}</p>{% endif %}
+  <p id="about">{{ series.about }}</p>
   {% if series_talks %}
     <ul class="talks">
       {% for talk in series_talks %}
