@@ -7,7 +7,7 @@ class Series(db.Model):
     name = db.StringProperty(required=True)
     slug = db.StringProperty()
     link = db.LinkProperty(required=False)
-    about = db.TextProperty()
+    about = db.TextProperty(required=True)
     created_user = db.UserProperty(required=True)
     updated_user = db.UserProperty(required=True)
     created_date = db.DateTimeProperty(auto_now_add=True)
@@ -25,7 +25,7 @@ class Series(db.Model):
 
 class Talk(db.Model):
     title = db.StringProperty(required=True)
-    summary = db.TextProperty()
+    summary = db.TextProperty(required=True)
     link = db.LinkProperty()
     presenters = db.StringListProperty()
     series = db.ReferenceProperty(Series, required=False)
