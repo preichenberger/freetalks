@@ -9,8 +9,7 @@ Run tests:
 
     nosetests --with-gae --gae-lib-root=/PATH/TO/google_appengine
 
-Go to [http://localhost:8080/_ah/admin/interactive Development Console] and run
-the follow:
+Go to [Development Console][console] and run the follow:
 
     from tests.fixtures import dataset
     dataset.setup()
@@ -18,3 +17,5 @@ the follow:
 ### Licenses
 
 This work is licensed under the MIT License (see the LICENSE file).
+
+[console]: http://localhost:8080/_ah/admin/interactive
