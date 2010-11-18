@@ -18,8 +18,10 @@ class Display(web.Handler):
         if series is None:
             self.set_404()
 
+        series_talks = []
         talks_query = models.Talk.all()
         talks_query.filter('series =', series.key())
-        series_talks = talks_query.fetch(limit=10)
+        for talk in talks_query:
+            series_talks.append(talk)
 
         self.render('series/display.html', series=series, series_talks=series_talks)
