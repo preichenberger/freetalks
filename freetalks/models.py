@@ -14,6 +14,10 @@ class Series(db.Model):
     created_date = db.DateTimeProperty(auto_now_add=True)
     updated_date = db.DateTimeProperty(auto_now=True)
 
+    @property
+    def url(self):
+        return '/series/%s' % self.slug
+
 class Talk(db.Model):
     title = db.StringProperty(required=True)
     summary = db.TextProperty()
@@ -30,6 +34,10 @@ class Talk(db.Model):
     updated_user = db.UserProperty(required=True)
     created_date = db.DateTimeProperty(auto_now_add=True)
     updated_date = db.DateTimeProperty(auto_now=True)
+
+    @property
+    def url(self):
+        return '/talk/%s' % self.key().id()
 
     @property
     def source(self):

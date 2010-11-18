@@ -3,5 +3,5 @@ from freetalks import handler
 
 application = webapp2.WSGIApplication([
     webapp2.Route(r'/', handler.general.Home, 'home'),
-    webapp2.Route(r'/talk/<id:[\w]+>', handler.talk.Display, 'talk-display'),
+    webapp2.Route(r'/talk/<id:[\d]+>', handler.talk.Display, 'talk-display'),
 ])
