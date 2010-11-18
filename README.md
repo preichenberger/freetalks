@@ -1,7 +1,7 @@
 Freetalks
 =========
 
-Freetalks is a video catalog of talks and lectures.
+Freetalks is a catalog of free talks and lectures.
 
 ### Development Data
 
