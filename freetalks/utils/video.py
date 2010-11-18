@@ -24,8 +24,27 @@ class BlipTv(Source):
     def link(self):
         return 'http://blip.tv/file/%s/' % self.link_id
 
+class Ted(Source):
+
+    @property
+    def embed(self):
+        return """
+            <object width="446" height="326">
+                <param name="movie" value="http://video.ted.com/assets/player/swf/EmbedPlayer.swf"></param>
+                <param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always"/>
+                <param name="wmode" value="transparent"></param>
+                <param name="bgColor" value="#ffffff"></param>
+                <param name="flashvars" value="vu=http://video.ted.com/talks/dynamic/%s-medium.flv&su=http://images.ted.com/images/ted/tedindex/embed-posters/GeroMisenboeck-2010G.embed_thumbnail.jpg&vw=432&vh=240&ap=0&ti=1000&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=gero_miesenboeck;year=2010;theme=a_taste_of_tedglobal_2010;theme=unconventional_explanations;theme=new_on_ted_com;theme=how_the_mind_works;event=TEDGlobal+2010;&preAdTag=tconf.ted/embed;tile=1;sz=512x288;" />
+                <embed src="http://video.ted.com/assets/player/swf/EmbedPlayer.swf" pluginspace="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" wmode="transparent" bgColor="#ffffff" width="446" height="326" allowFullScreen="true" allowScriptAccess="always" flashvars="vu=http://video.ted.com/talks/dynamic/%s-medium.flv&su=http://images.ted.com/images/ted/tedindex/embed-posters/GeroMisenboeck-2010G.embed_thumbnail.jpg&vw=432&vh=240&ap=0&ti=1000&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=gero_miesenboeck;year=2010;theme=a_taste_of_tedglobal_2010;theme=unconventional_explanations;theme=new_on_ted_com;theme=how_the_mind_works;event=TEDGlobal+2010;"></embed>
+                </object>""" % (self.media_id, self.media_id)
+
+    @property
+    def link(self):
+        return 'http://www.ted.com/talks/%s.html' % self.link_id
+
 map = {
     'blip.tv': BlipTv,
+    'ted': Ted,
 }
 
 def get(type_, media_id, link_id=None):
