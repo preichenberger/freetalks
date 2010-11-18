@@ -49,9 +49,8 @@ def setup():
     talks.append(
         models.Talk(
             title='Plenary: Introduction and Welcome',
-            summary='Plenary: Introduction and Welcome',
-            link='http://pycon.org',
             presenters=['Van Lindberg'],
+            link=':ttp://us.pycon.org/2010/conference/schedule/event/3/',
             tags=['python', 'PyCon'],
             date=datetime.datetime.today(),
             source_type='blip.tv',
@@ -67,14 +66,12 @@ def setup():
     talks.append(
         models.Talk(
             title="Aaron Huey: America's native prisoners of war",
-            summary="Aaron Huey: America's native prisoners of war",
-            link='http://test',
             presenters=['Aaron Huey'],
             tags=['python', 'america'],
             date=datetime.datetime.today(),
             source_type='ted',
             source_link_id='aaron_huey',
-            source_media_id='AaronHuey_2010X-medium.flv',
+            source_media_id='AaronHuey_2010X',
             source_posted_date=datetime.datetime(2010, 9, 1),
             created_user=test_user,
             updated_user=test_user,
@@ -85,8 +82,6 @@ def setup():
     talks.append(
         models.Talk(
             title='Python vs. Ruby: A Battle to The Death',
-            summary='Python vs. Ruby: A Battle to The Death',
-            link='http://www.seapig.org/NorthwestPythonDay',
             presenters=['Gary Bernhardt'],
             tags=['python', 'ruby'],
             date=datetime.datetime.today(),
@@ -103,8 +98,6 @@ def setup():
     talks.append(
         models.Talk(
             title='Google Developers Day US - Python Design Patterns',
-            summary='Google Developers Day US - Python Design Patterns',
-            link='http://www.google.com/events/developerday/2010',
             presenters=['Alex Martelli'],
             tags=['python'],
             date=datetime.datetime.today(),
