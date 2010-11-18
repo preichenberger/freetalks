@@ -56,7 +56,7 @@ def setup():
             date=datetime.datetime.today(),
             source_type='blip.tv',
             source_link_id='3264001',
-            source_media_id='3264001',
+            source_media_id='AYHItEYC',
             source_posted_date=datetime.datetime(2010, 2, 21),
             created_user=test_user,
             updated_user=test_user,
