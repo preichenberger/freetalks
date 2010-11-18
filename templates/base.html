@@ -23,7 +23,26 @@
   </head>
 
   <body id="{% block body-id %}base{% endblock %}">
-{% block body %}{% block content %}{{ content }}{% endblock %}{% endblock %}
+  <div id="head">
+    <div id="logo" class="center-content">FreeTalks</div>
+    <div id="bar">
+      <div class="center-content">
+        <ul id="nav">
+          <li><a href="/talks">Talks</a></li>
+          <li><a href="/series">Series</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="center-content">
+    <div id="container">
+    {% block body %}
+      <div id="content">
+        {% block content %}{{ content }}{% endblock %}
+      </div>
+    {% endblock %}
+    </div>
+  </div>
   </body>
 </html>
 {% endspaceless %}

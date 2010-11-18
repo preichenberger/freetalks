@@ -1,0 +1,39 @@
+#container {
+  margin: 0;
+  padding: 1em 0;
+}
+
+#logo {
+  font-size: 30px;
+}
+
+#bar {
+  background: #000;
+}
+
+div.center-content {
+  margin: 0 auto;
+  position: relative;
+  width: 975px;
+}
+
+#bar ul {
+  margin: 0;
+  padding: 0;
+}
+
+#bar li {
+  display: inline;
+  font-size: 20px;
+  font-weight: bold;
+  list-style: disc outside none;
+  margin-right: 1em;
+}
+
+#bar li a:link,
+#bar li a:hover,
+#bar li a:visited {
+  color: #fff;
+  text-decoration: none;
+  text-transform: lowercase;
+}
