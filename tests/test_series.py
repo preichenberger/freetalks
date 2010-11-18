@@ -13,4 +13,4 @@ class TestSeries(unittest.TestCase):
         dataset.clear()
 
     def test_exception_if_empty_name(self):
-        self.assertRaises(dataset.db.BadValueError, Series, name='', slug='slug', link='http://test', created_user=self._test_user, updated_user=self._test_user)
+        self.assertRaises(dataset.db.BadValueError, Series, name='', slug='slug', link='http://test', created_user=self._test_user, updated_user=self._test_user, summary='testsummary')
