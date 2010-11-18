@@ -20,6 +20,15 @@ def setup():
     test_user = User(email='test@freetalks.com')
 
     series_list = []
+    
+    parent_pycon_series = models.Series(
+        name='Parent PyCon',
+        slug='python_slug',
+        link='http://pycon.org/',
+        created_user=test_user,
+        updated_user=test_user,
+    )
+    parent_pycon_series.put()
 
     pycon_series = models.Series(
         name='PyCon',
@@ -27,8 +36,10 @@ def setup():
         link='http://pycon.org/',
         created_user=test_user,
         updated_user=test_user,
+        parent=parent_pycon_series,
     )
 
+    series_list.append(parent_pycon_series)
     series_list.append(pycon_series)
 
     put_list(series_list)
