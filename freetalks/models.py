@@ -36,7 +36,7 @@ class Talk(db.Model):
 
     @property
     def url(self):
-        return '/talk/%s' % self.key().id()
+        return '/talks/%s' % self.key().id()
 
     @property
     def source(self):

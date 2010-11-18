@@ -1,1 +1,1 @@
-from freetalks.handler import general, talk
+from freetalks.handler import general, talk, series
