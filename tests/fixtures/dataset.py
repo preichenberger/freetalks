@@ -50,7 +50,7 @@ def setup():
         models.Talk(
             title='Plenary: Introduction and Welcome',
             presenters=['Van Lindberg'],
-            link=':ttp://us.pycon.org/2010/conference/schedule/event/3/',
+            link='http://us.pycon.org/2010/conference/schedule/event/3/',
             tags=['python', 'PyCon'],
             date=datetime.datetime.today(),
             source_type='blip.tv',
