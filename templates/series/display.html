@@ -1,13 +1,4 @@
 {% extends "base.html" %}
 
-{% block head-description %}{{ talk.summary }}{% endblock %}
-
 {% block content %}
-  <h2>{{ talk.title }}</h2>
-  <p>{{ talk.source.embed }}</p>
-  <p id="summary">{{ talk.summary }}</p>
-  <ul id="links">
-    <li><a href="{{ talk.source.link }}">Source</a></li>
-    {% if talk.link %}<li><a href="{{ talk.link }}">Talk link</a></ul>{% endif %}
-  </ul>
 {% endblock %}
