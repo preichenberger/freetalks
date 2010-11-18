@@ -1,4 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <h2>{{ series.name }}</h2>
+  {% if series.about %}<p id="about">{{ series.about }}</p>{% endif %}
+  {% if series_talks %}
+    <ul class="talks">
+      {% for talk in series_talks %}
+        <li><a href="{{ talk.url }}">{{ talk }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no talks in this series.</p>
+  {% endif %}
 {% endblock %}
