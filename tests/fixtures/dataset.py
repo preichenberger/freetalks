@@ -23,7 +23,7 @@ def setup():
     
     parent_pycon_series = models.Series(
         name='Parent PyCon',
-        slug='python_slug',
+        slug='parent-python-slug',
         link='http://pycon.org/',
         created_user=test_user,
         updated_user=test_user,
@@ -32,7 +32,7 @@ def setup():
 
     pycon_series = models.Series(
         name='PyCon',
-        slug='python_slug',
+        slug='python-slug',
         link='http://pycon.org/',
         created_user=test_user,
         updated_user=test_user,
