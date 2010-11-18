@@ -2,6 +2,12 @@ from google.appengine.ext import db
 from freetalks import models
 from freetalks import web
 
+class List(web.Handler):
+
+    def get(self):
+        series_list = models.Series.all()
+        self.render('series/index.html', series_list=series_list)
+
 class Display(web.Handler):
 
     def get(self, slug):

@@ -13,6 +13,12 @@ class Series(db.Model):
     created_date = db.DateTimeProperty(auto_now_add=True)
     updated_date = db.DateTimeProperty(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name
+
     @property
     def url(self):
         return '/series/%s' % self.slug
@@ -33,6 +39,12 @@ class Talk(db.Model):
     updated_user = db.UserProperty(required=True)
     created_date = db.DateTimeProperty(auto_now_add=True)
     updated_date = db.DateTimeProperty(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    def __unicode__(self):
+        return self.title
 
     @property
     def url(self):
