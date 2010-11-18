@@ -42,9 +42,21 @@ class Ted(Source):
     def link(self):
         return 'http://www.ted.com/talks/%s.html' % self.link_id
 
+class Vimeo(Source):
+
+    @property
+    def embed(self):
+        return '<iframe src="http://player.vimeo.com/video/%s" width="480" height="270" frameborder="0"></iframe>' \
+        % (self.media_id)
+
+    @property
+    def link(self):
+        return 'http://vimeo.com/%s' % self.link_id
+
 map = {
     'blip.tv': BlipTv,
     'ted': Ted,
+    'vimeo': Vimeo,
 }
 
 def get(type_, media_id, link_id=None):
