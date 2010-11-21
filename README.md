@@ -3,13 +3,13 @@ Freetalks
 
 Freetalks is a catalog of free talks and lectures.
 
-### Development Data
+### Development
 
 Run tests:
 
     nosetests --with-gae --gae-lib-root=/PATH/TO/google_appengine
 
-Go to [Development Console][console] and run the follow:
+To setup development data go to the [Development Console][console] and run the following:
 
     from tests.fixtures import dataset
     dataset.setup()
