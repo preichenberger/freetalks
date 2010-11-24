@@ -1,16 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>{{ series.name }}</h2>
-  {% if series.about %}<p id="about">{{ series.about }}</p>{% endif %}
-  {% if pager %}
-    <ul class="talks">
-      {% for talk in pager %}
-        <li><a href="{{ talk.url }}">{{ talk }}</a></li>
-      {% endfor %}
-    </ul>
-    {% include "snippets/pager_navigation.html" %}
-  {% else %}
-    <p>There are no talks in this series.</p>
-  {% endif %}
+
+<h2>{{ series.name }}</h2>
+
+{% if series.about %}<p id="about">{{ series.about }}</p>{% endif %}
+
+{% if pager %}
+  <table>
+  <tr>
+    <th>Title</th>
+    <th>Summary</th>
+    <th>Updated</th>
+    <th>Created</th>
+  </tr>
+    {% for talk in pager %}
+    <tr>
+      <td><a href="{{ talk.url }}">{{ talk }}</a></td>
+      <td>{{ talk.summary|default_if_none:"" }}</td>
+      <td>{{ talk.updated_date|timesince }}</td>
+      <td>{{ talk.created_date|timesince }}</td>
+    </tr>
+    {% endfor %}
+  </ul>
+  {% include "snippets/pager_navigation.html" %}
+{% else %}
+  <p>There are no talks in this series.</p>
+{% endif %}
+
 {% endblock %}

@@ -4,11 +4,27 @@
 {% block head-description %}A list of series.{% endblock %}
 
 {% block content %}
-  {% if series_list %}
-    {% for series in series_list %}
-      <p><a href="{{ series.url }}">{{ series }}</a></p>
-    {% endfor %}
-  {% else %}
-    <p>No series found.</p>
-  {% endif %}
+
+<table>
+{% if pager %}
+  <tr>
+    <th>Name</th>
+    <th>Summary</th>
+    <th>Updated</th>
+    <th>Created</th>
+  </tr>
+  {% for series in pager %}
+  <tr>
+    <td><a href="{{ series.url }}">{{ series }}</a></td>
+    <td>{{ series.summary|default_if_none:"" }}</td>
+    <td>{{ series.updated_date|timesince }}</td>
+    <td>{{ series.created_date|timesince }}</td>
+  </tr>
+  {% endfor %}
+  </table>
+  {% include "snippets/pager_navigation.html" %}
+{% else %}
+<p>No series found.</p>
+{% endif %}
+
 {% endblock %}

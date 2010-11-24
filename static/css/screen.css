@@ -16,6 +16,7 @@
 
 #bar {
   background: #000;
+  min-height: 10px;
 }
 
 div.center-content {

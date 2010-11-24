@@ -5,9 +5,9 @@ from freetalks.utils import pager
 class Display(web.Handler):
 
     def get(self, slug):
-        series = models.Series.all().filter("slug =", slug).get()
+        series = models.Series.all().filter('slug =', slug).get()
         if series:
-            talks = models.Talk.all().filter('series =', series.key())
+            talks = models.Talk.all().filter('series =', series.key()).order('series_order')
             p = pager.Pager(talks, self.request)
             self.render('series.html', series=series, pager=p)
         else:
