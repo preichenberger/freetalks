@@ -12,6 +12,7 @@ Run tests:
 To setup development data go to the [Development Console][console] and run the following:
 
     from tests.fixtures import dataset
+    dataset.clear()
     dataset.setup()
 
 ### Licenses

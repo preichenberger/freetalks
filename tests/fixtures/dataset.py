@@ -13,16 +13,16 @@ def clear():
     clear_type(models.Series)
 
 def setup():
-    test_user = User(email='test@freetalks.com')
+    user = User(email='test@freetalks.com')
 
     pycon_series = models.Series(
         name='PyCon',
-        slug='python-slug',
         link='http://pycon.org/',
         about='A series of PyCon talks',
-        created_user=test_user,
-        updated_user=test_user,
-    ).put()
+        created_user=user,
+        updated_user=user,
+    )
+    pycon_series.put()
 
     models.Talk(
         title='Plenary: Introduction and Welcome',
@@ -35,8 +35,8 @@ def setup():
         source_media_id='AYHItEYC',
         source_posted_date=datetime.datetime(2010, 2, 21),
         summary='Intro to PyCon 2010',
-        created_user=test_user,
-        updated_user=test_user,
+        created_user=user,
+        updated_user=user,
         series=pycon_series,
     ).put()
     models.Talk(
@@ -49,8 +49,8 @@ def setup():
         source_media_id='AaronHuey_2010X',
         source_posted_date=datetime.datetime(2010, 9, 1),
         summary='A discussion on America and prisoners of war',
-        created_user=test_user,
-        updated_user=test_user,
+        created_user=user,
+        updated_user=user,
         series=pycon_series,
     ).put()
     models.Talk(
@@ -63,8 +63,8 @@ def setup():
         source_media_id='9471538',
         summary='Noob fest',
         source_posted_date=datetime.datetime(2010, 2, 1),
-        created_user=test_user,
-        updated_user=test_user,
+        created_user=user,
+        updated_user=user,
         series=pycon_series,
     ).put()
     models.Talk(
@@ -77,7 +77,7 @@ def setup():
         source_media_id='0vJJlVBVTFg',
         summary='Python has some patterns for design',
         source_posted_date=datetime.datetime(2007, 6, 4),
-        created_user=test_user,
-        updated_user=test_user,
+        created_user=user,
+        updated_user=user,
         series=pycon_series,
     ).put()
