@@ -5,9 +5,15 @@ Freetalks is a catalog of free talks and lectures.
 
 ### Development
 
+Disable deprecation warnings (add to top of nosetests):
+
+    import warnings
+    warnings.filterwarnings('ignore', category=DeprecationWarning)
+
 Run tests:
 
-    nosetests --with-gae --gae-lib-root=/PATH/TO/google_appengine
+    alias gaetest="nosetests --with-gae --gae-lib-root=$HOME/.lib/google_appengine/"
+    gaetest
 
 To setup development data go to the [Development Console][console] and run the following:
 
