@@ -4,7 +4,6 @@
 {% block head-description %}A list of series.{% endblock %}
 
 {% block content %}
-  <h2>Series</h2>
   {% if series_list %}
     {% for series in series_list %}
       <p><a href="{{ series.url }}">{{ series }}</a></p>

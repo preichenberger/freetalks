@@ -1,27 +1,12 @@
-from google.appengine.ext import db
 from freetalks import models
 from freetalks import web
-
-class List(web.Handler):
-
-    def get(self):
-        series_list = models.Series.all()
-        self.render('series/index.html', series_list=series_list)
 
 class Display(web.Handler):
 
     def get(self, slug):
-        series_query = models.Series.all()
-        series_query.filter("slug =", slug)
-        series = series_query.get()
-       
-        if series is None:
-            self.set_404()
-
-        series_talks = []
-        talks_query = models.Talk.all()
-        talks_query.filter('series =', series.key())
-        for talk in talks_query:
-            series_talks.append(talk)
-
-        self.render('series/display.html', series=series, series_talks=series_talks)
+        series = models.Series.all().filter("slug =", slug).get()
+        if series:
+            talks = models.Talk.all().filter('series =', series.key()).fetch(100)
+            self.render('series.html', series=series, talks=talks)
+        else:
+            self.error(404)

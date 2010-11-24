@@ -1,15 +1,14 @@
-from django.template.defaultfilters import slugify
 from google.appengine.ext import db
-from freetalks import exceptions
-from freetalks.utils import video
+from freetalks.utils import media
+from freetalks.utils import slugify
 
 SOURCE_CHOICES = set(['blip.tv', 'ted', 'vimeo', 'youtube'])
 
 class Series(db.Model):
     name = db.StringProperty(required=True)
-    slug = db.CategoryProperty(required=True)
+    slug = db.StringProperty(required=True)
+    summary = db.TextProperty()
     link = db.LinkProperty()
-    about = db.TextProperty()
     created_user = db.UserProperty(required=True)
     updated_user = db.UserProperty(required=True)
     created_date = db.DateTimeProperty(auto_now_add=True)
@@ -36,29 +35,29 @@ class Series(db.Model):
             series = series.filter('__key__ !=', self.key())
         series = series.filter('slug =', self.slug)
         if series.count(1) == 1:
-            raise exceptions.ValidationError('Slug "%s" already exists.' % self.slug)
+            raise db.BadValueError('Slug "%s" already exists.' % self.slug)
 
-    def put(self, *args, **kwargs):
-        self.clean()
-        self.validate()
+    def put(self, validate=True, clean=True, *args, **kwargs):
+        if clean:
+            self.clean()
+        if validate:
+            self.validate()
         super(Series, self).put(*args, **kwargs)
 
     @property
     def url(self):
-        return '/series/%s' % self.slug
+        return '/%s' % self.slug
 
 class Talk(db.Model):
+    series = db.ReferenceProperty(Series, required=True)
+    series_order = db.IntegerProperty(required=True)
     title = db.StringProperty(required=True)
     summary = db.TextProperty()
     link = db.LinkProperty()
     presenters = db.StringListProperty()
-    series = db.ReferenceProperty(Series)
     tags = db.StringListProperty()
     date = db.DateTimeProperty()
-    source_type = db.StringProperty(choices=SOURCE_CHOICES)
-    source_link_id = db.StringProperty()
-    source_media_id = db.StringProperty()
-    source_posted_date = db.DateTimeProperty()
+    source = db.StringListProperty()
     created_user = db.UserProperty(required=True)
     updated_user = db.UserProperty(required=True)
     created_date = db.DateTimeProperty(auto_now_add=True)
@@ -72,11 +71,13 @@ class Talk(db.Model):
 
     @property
     def url(self):
-        return '/talks/%s' % self.key().id()
+        return '%s/%s' % (self.series.url, self.key().id())
 
     @property
-    def source(self):
-        return video.get(self.source_type, self.source_media_id, self.source_link_id)
+    def media(self):
+        if not hasattr(self, '_media'):
+            self._media = media.get(self.source)
+        return self._media
 
     def clean(self):
         pass
@@ -84,7 +85,9 @@ class Talk(db.Model):
     def validate(self):
         pass
 
-    def put(self, *args, **kwargs):
-        self.clean()
-        self.validate()
+    def put(self, validate=True, clean=True, *args, **kwargs):
+        if clean:
+            self.clean()
+        if validate:
+            self.validate()
         super(Talk, self).put(*args, **kwargs)

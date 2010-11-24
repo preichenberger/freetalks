@@ -3,9 +3,9 @@
 {% block content %}
   <h2>{{ series.name }}</h2>
   {% if series.about %}<p id="about">{{ series.about }}</p>{% endif %}
-  {% if series_talks %}
+  {% if talks %}
     <ul class="talks">
-      {% for talk in series_talks %}
+      {% for talk in talks %}
         <li><a href="{{ talk.url }}">{{ talk }}</a></li>
       {% endfor %}
     </ul>

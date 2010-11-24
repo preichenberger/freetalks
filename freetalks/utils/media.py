@@ -51,7 +51,7 @@ class Vimeo(Source):
 
     @property
     def link(self):
-        return 'http://vimeo.com/%s' % self.link_id
+        return 'http://vimeo.com/%s' % self.media_id
 
 class YouTube(Source):
 
@@ -66,14 +66,15 @@ class YouTube(Source):
 
     @property
     def link(self):
-        return 'http://www.youtube.com/watch?v=%s' % self.link_id
+        return 'http://www.youtube.com/watch?v=%s' % self.media_id
 
-map = {
+__map = {
     'blip.tv': BlipTv,
     'ted': Ted,
     'vimeo': Vimeo,
     'youtube': YouTube,
 }
 
-def get(type_, media_id, link_id=None):
-    return map.get(type_, Source)(media_id, link_id)
+def get(source_list):
+    source = source_list[0].split('\t')
+    return __map.get(source[0], Source)(*source[1:])
