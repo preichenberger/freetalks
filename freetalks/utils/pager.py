@@ -57,5 +57,8 @@ class Pager(object):
     def __iter__(self):
         return self.objects.__iter__()
 
+    def __nonzero__(self):
+        return bool(self.objects)
+
     def next(self):
         return self.objects.next()

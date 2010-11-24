@@ -8,7 +8,7 @@ class Display(web.Handler):
         series = models.Series.all().filter("slug =", slug).get()
         if series:
             talks = models.Talk.all().filter('series =', series.key())
-            talks = pager.Pager(talks, self.request)
-            self.render('series.html', series=series, talks=talks)
+            p = pager.Pager(talks, self.request)
+            self.render('series.html', series=series, pager=p)
         else:
             self.error(404)

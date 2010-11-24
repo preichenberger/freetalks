@@ -3,19 +3,13 @@
 {% block content %}
   <h2>{{ series.name }}</h2>
   {% if series.about %}<p id="about">{{ series.about }}</p>{% endif %}
-  {% if talks %}
+  {% if pager %}
     <ul class="talks">
-      {% for talk in talks %}
+      {% for talk in pager %}
         <li><a href="{{ talk.url }}">{{ talk }}</a></li>
       {% endfor %}
     </ul>
-    {% if talks.has_previous or talks.has_next %}
-      <p>
-      {% if talks.has_previous %}<a href="{{ talks.previous_url }}">&laquo; Previous</a>{% endif %}
-      {% if talks.has_previous and talks.has_next %} - {% endif %}
-      {% if talks.has_next %}<a href="{{ talks.next_url }}">Next &raquo;</a>{% endif %}
-      </p>
-    {% endif %}
+    {% include "snippets/pager_navigation.html" %}
   {% else %}
     <p>There are no talks in this series.</p>
   {% endif %}

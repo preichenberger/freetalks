@@ -1,0 +1,7 @@
+{% if pager.has_previous or pager.has_next %}
+  <p>
+  {% if pager.has_previous %}<a href="{{ pager.previous_url }}">&laquo; Previous</a>{% endif %}
+  {% if pager.has_previous and pager.has_next %} - {% endif %}
+  {% if pager.has_next %}<a href="{{ pager.next_url }}">Next &raquo;</a>{% endif %}
+  </p>
+{% endif %}
