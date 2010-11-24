@@ -83,7 +83,11 @@ class Talk(db.Model):
         pass
 
     def validate(self):
-        pass
+        talks = Talk.all()
+        talks.filter('series =', self.series)
+        talks.filter('series_order =', self.series_order)
+        if talks.count(1) == 1:
+            raise db.BadValueError('Series order "%s" already exists.' % self.series_order)
 
     def put(self, validate=True, clean=True, *args, **kwargs):
         if clean:

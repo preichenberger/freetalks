@@ -9,6 +9,13 @@
         <li><a href="{{ talk.url }}">{{ talk }}</a></li>
       {% endfor %}
     </ul>
+    {% if talks.has_previous or talks.has_next %}
+      <p>
+      {% if talks.has_previous %}<a href="{{ talks.previous_url }}">&laquo; Previous</a>{% endif %}
+      {% if talks.has_previous and talks.has_next %} - {% endif %}
+      {% if talks.has_next %}<a href="{{ talks.next_url }}">Next &raquo;</a>{% endif %}
+      </p>
+    {% endif %}
   {% else %}
     <p>There are no talks in this series.</p>
   {% endif %}

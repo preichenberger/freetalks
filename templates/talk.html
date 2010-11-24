@@ -6,7 +6,7 @@
 {% block content %}
   <h2>{{ talk.title }}</h2>
   <p>{{ talk.media.embed }}</p>
-  <p id="summary">{{ talk.summary }}</p>
+  {% if talk.summary %}<p id="summary">{{ talk.summary }}</p>{% endif %}
   <ul id="links">
     <li><a href="{{ talk.media.link }}">Source</a></li>
     {% if talk.link %}<li><a href="{{ talk.link }}">Talk link</a></li>{% endif %}
