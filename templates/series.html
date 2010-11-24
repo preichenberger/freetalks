@@ -11,14 +11,12 @@
   <tr>
     <th>Title</th>
     <th>Summary</th>
-    <th>Updated</th>
-    <th>Created</th>
+    <th>Date</th>
   </tr>
     {% for talk in pager %}
     <tr>
       <td><a href="{{ talk.url }}">{{ talk }}</a></td>
       <td>{{ talk.summary|default_if_none:"" }}</td>
-      <td>{{ talk.updated_date|timesince }}</td>
       <td>{{ talk.created_date|timesince }}</td>
     </tr>
     {% endfor %}
