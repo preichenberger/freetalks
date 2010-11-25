@@ -10,3 +10,12 @@ class Display(web.Handler):
             self.render('talk.html', talk=talk)
         else:
             self.error(404)
+
+class Embed(web.Handler):
+
+    def get(self, slug, id):
+        talk = shortcuts.get_by_id(models.Talk, id)
+        if talk is not None:
+            self.render('talk_embed.html', talk=talk)
+        else:
+            self.error(404)

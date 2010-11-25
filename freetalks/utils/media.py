@@ -17,7 +17,7 @@ class BlipTv(Source):
     @property
     def embed(self):
         return '<embed src="http://blip.tv/play/%s" type="application/x-shockwave-flash" ' \
-               'width="480" height="350" allowscriptaccess="always" allowfullscreen="true">' \
+               'width="480" height="350" allowscriptaccess="always" allowfullscreen="true" wmode="transparent">' \
                '</embed>' % self.media_id
 
     @property
@@ -61,7 +61,7 @@ class YouTube(Source):
                '<param name="movie" value="http://www.youtube.com/v/%s?fs=1&amp;hl=en_US"></param>' \
                '<param name="allowFullScreen" value="true"></param>' \
                '<param name="allowscriptaccess" value="always"></param>' \
-               '<embed src="http://www.youtube.com/v/%s?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed>' \
+               '<embed src="http://www.youtube.com/v/%s?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385" wmode="transparent"></embed>' \
                '</object>' % (self.media_id, self.media_id)
 
     @property

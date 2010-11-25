@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ block.super }}
+{% include "snippets/head_popup.html" %}
+{% endblock %}
+
 {% block head-title %}{{ talk.title }} - {{ block.super }}{% endblock %}
 {% block head-description %}{{ talk.summary }}{% endblock %}
 
 {% block content %}
   <h2>{{ talk.title }}</h2>
-  <p>{{ talk.media.embed }}</p>
+  <div id="embed">{{ talk.media.embed }}</div><br />
   {% if talk.summary %}<p id="summary">{{ talk.summary }}</p>{% endif %}
   <ul id="links">
+    <li><a href="#embed" rel="facebox">Popup New Player</a></li>
     <li><a href="{{ talk.media.link }}">Source</a></li>
-    {% if talk.link %}<li><a href="{{ talk.link }}">Talk link</a></li>{% endif %}
+    {% if talk.link %}<li><a href="{{ talk.link }}">Talk Link</a></li>{% endif %}
   </ul>
 {% endblock %}
