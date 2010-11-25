@@ -35,6 +35,8 @@ class TestSeries(unittest.TestCase):
     def test_name(self):
         self.assertRaises(db.BadValueError, self.model, name='')
         self.assertRaises(db.BadValueError, self.model, remove=['name'])
+        # Name must start with an alphabetic character
+        self.assertRaises(db.BadValueError, self.model, name='0abc')
 
     def test_slug(self):
         series = self.model(name='Some Video Name')

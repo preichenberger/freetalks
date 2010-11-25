@@ -1,4 +1,5 @@
 from google.appengine.ext import db
+from freetalks import utils
 from freetalks.utils import media
 from freetalks.utils import slugify
 
@@ -30,6 +31,8 @@ class Series(db.Model):
             self.slug = slugify(self.title)
 
     def validate(self):
+        if not utils.SERIES_NAME_RE.match(self.name):
+            raise db.BadValueError('Series name must start with an alphabetic character.')
         series = Series.all()
         if self.is_saved():
             series = series.filter('__key__ !=', self.key())
@@ -71,19 +74,13 @@ class Talk(db.Model):
 
     @property
     def url(self):
-        return '%s/%s' % (self.series.url, self.series_order)
+        return '/%s' % self.key().id()
 
     @property
     def media(self):
         if not hasattr(self, '_media'):
             self._media = media.get(self.source)
         return self._media
-
-    @staticmethod
-    def get_by_slug_order(slug, order):
-        series = Series.all().filter('slug =', slug).get()
-        if series:
-            return Talk.all().filter('series =', series).filter('series_order =', int(order)).get()
 
     def clean(self):
         pass

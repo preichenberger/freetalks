@@ -1,7 +1,11 @@
 import re
 
-_slugify_strip_re = re.compile(r'[^\w\s-]')
-_slugify_hyphenate_re = re.compile(r'[-\s]+')
+SERIES_NAME = r'[a-zA-Z]{1}[a-zA-Z0-9_-]*'
+
+SERIES_NAME_RE = re.compile(SERIES_NAME)
+SLUGIFY_STRIP_RE = re.compile(r'[^\w\s-]')
+SLUGIFY_HYPHENATE_RE = re.compile(r'[-\s]+')
+
 def slugify(value):
     """
     Trent Mick
@@ -14,5 +18,5 @@ def slugify(value):
     if not isinstance(value, unicode):
         value = unicode(value)
     value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
-    value = unicode(_slugify_strip_re.sub('', value).strip().lower())
-    return _slugify_hyphenate_re.sub('-', value)
+    value = unicode(SLUGIFY_STRIP_RE.sub('', value).strip().lower())
+    return SLUGIFY_HYPHENATE_RE.sub('-', value)
