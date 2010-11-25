@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 
-{% block head %}
-{{ block.super }}
-{% include "snippets/head_popup.html" %}
-{% endblock %}
+{% block head-title %}{{ series }} - {{ block.super }}{% endblock %}
+{% block head %}{{ block.super }}{% include "snippets/head_popup.html" %}{% endblock %}
 
 {% block content %}
 
@@ -15,16 +13,16 @@
   <table>
   <tr>
     <th>Title</th>
+    <th></th>
     <th>Summary</th>
     <th>Date</th>
-    <th>Media</th>
   </tr>
     {% for talk in pager %}
     <tr>
       <td><a href="{{ talk.url }}">{{ talk }}</a></td>
+      <td><a href="{{ talk.url }}/embed" rel="facebox">Play</a></td>
       <td>{{ talk.summary|default_if_none:"" }}</td>
       <td>{{ talk.created_date|timesince }}</td>
-      <td><a href="{{ talk.url }}/embed" rel="facebox">Play</a></td>
     </tr>
     {% endfor %}
   </ul>

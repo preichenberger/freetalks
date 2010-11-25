@@ -6,7 +6,9 @@ class Display(web.Handler):
 
     def get(self, slug, id):
         talk = shortcuts.get_by_id(models.Talk, id)
-        if talk is not None:
+        if self.request.path != talk.url:
+            self.redirect(talk.url)
+        elif talk is not None:
             self.render('talk.html', talk=talk)
         else:
             self.error(404)
