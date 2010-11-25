@@ -15,18 +15,8 @@ def clear():
 def setup():
     user = User(email='test@freetalks.com')
 
-    pycon_series = models.Series(
-        name='PyCon',
-        link='http://pycon.org/',
-        about='A series of PyCon talks',
-        created_user=user,
-        updated_user=user,
-    )
-    pycon_series.put()
-
-    models.Talk(
-        series=pycon_series,
-        series_order=0,
+    talks = []
+    talks.append(models.Talk(
         title='Plenary: Introduction and Welcome',
         presenters=['Van Lindberg'],
         link='http://us.pycon.org/2010/conference/schedule/event/3/',
@@ -36,10 +26,8 @@ def setup():
         summary='Intro to PyCon 2010',
         created_user=user,
         updated_user=user,
-    ).put()
-    models.Talk(
-        series=pycon_series,
-        series_order=1,
+    ))
+    talks.append(models.Talk(
         title="Aaron Huey: America's native prisoners of war",
         presenters=['Aaron Huey'],
         tags=['python', 'america'],
@@ -48,10 +36,8 @@ def setup():
         summary='A discussion on America and prisoners of war',
         created_user=user,
         updated_user=user,
-    ).put()
-    models.Talk(
-        series=pycon_series,
-        series_order=2,
+    ))
+    talks.append(models.Talk(
         title='Python vs. Ruby: A Battle to The Death',
         presenters=['Gary Bernhardt'],
         tags=['python', 'ruby'],
@@ -60,10 +46,8 @@ def setup():
         summary='Noob fest',
         created_user=user,
         updated_user=user,
-    ).put()
-    models.Talk(
-        series=pycon_series,
-        series_order=3,
+    ))
+    talks.append(models.Talk(
         title='Google Developers Day US - Python Design Patterns',
         presenters=['Alex Martelli'],
         tags=['python'],
@@ -72,4 +56,19 @@ def setup():
         summary='Python has some patterns for design',
         created_user=user,
         updated_user=user,
-    ).put()
+    ))
+
+    for talk in talks:
+        talk.put()
+
+    talks = [talk.key() for talk in talks]
+
+    series = models.Series(
+        name='PyCon',
+        link='http://pycon.org/',
+        summary='A series of PyCon talks',
+        talks=talks,
+        created_user=user,
+        updated_user=user,
+    )
+    series.put()

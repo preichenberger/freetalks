@@ -5,11 +5,54 @@ from freetalks.utils import slugify
 
 SOURCE_CHOICES = set(['blip.tv', 'ted', 'vimeo', 'youtube'])
 
+class Talk(db.Model):
+    title = db.StringProperty(required=True)
+    summary = db.TextProperty()
+    link = db.LinkProperty()
+    presenters = db.StringListProperty()
+    tags = db.StringListProperty()
+    date = db.DateTimeProperty()
+    source = db.StringListProperty()
+    created_user = db.UserProperty(required=True)
+    updated_user = db.UserProperty(required=True)
+    created_date = db.DateTimeProperty(auto_now_add=True)
+    updated_date = db.DateTimeProperty(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    def __unicode__(self):
+        return self.title
+
+    @property
+    def url(self):
+        return '/%s' % self.key().id()
+
+    @property
+    def media(self):
+        if not hasattr(self, '_media'):
+            self._media = media.get(self.source)
+        return self._media
+
+    def clean(self):
+        pass
+
+    def validate(self):
+        pass
+
+    def put(self, validate=True, clean=True, *args, **kwargs):
+        if clean:
+            self.clean()
+        if validate:
+            self.validate()
+        super(Talk, self).put(*args, **kwargs)
+
 class Series(db.Model):
     name = db.StringProperty(required=True)
     slug = db.StringProperty(required=True)
     summary = db.TextProperty()
     link = db.LinkProperty()
+    talks = db.ListProperty(db.Key)
     created_user = db.UserProperty(required=True)
     updated_user = db.UserProperty(required=True)
     created_date = db.DateTimeProperty(auto_now_add=True)
@@ -50,51 +93,3 @@ class Series(db.Model):
     @property
     def url(self):
         return '/%s' % self.slug
-
-class Talk(db.Model):
-    series = db.ReferenceProperty(Series, required=True)
-    series_order = db.IntegerProperty(required=True)
-    title = db.StringProperty(required=True)
-    summary = db.TextProperty()
-    link = db.LinkProperty()
-    presenters = db.StringListProperty()
-    tags = db.StringListProperty()
-    date = db.DateTimeProperty()
-    source = db.StringListProperty()
-    created_user = db.UserProperty(required=True)
-    updated_user = db.UserProperty(required=True)
-    created_date = db.DateTimeProperty(auto_now_add=True)
-    updated_date = db.DateTimeProperty(auto_now=True)
-
-    def __str__(self):
-        return self.title
-
-    def __unicode__(self):
-        return self.title
-
-    @property
-    def url(self):
-        return '/%s' % self.key().id()
-
-    @property
-    def media(self):
-        if not hasattr(self, '_media'):
-            self._media = media.get(self.source)
-        return self._media
-
-    def clean(self):
-        pass
-
-    def validate(self):
-        talks = Talk.all()
-        talks.filter('series =', self.series)
-        talks.filter('series_order =', self.series_order)
-        if talks.count(1) == 1:
-            raise db.BadValueError('Series order "%s" already exists.' % self.series_order)
-
-    def put(self, validate=True, clean=True, *args, **kwargs):
-        if clean:
-            self.clean()
-        if validate:
-            self.validate()
-        super(Talk, self).put(*args, **kwargs)

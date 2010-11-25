@@ -9,7 +9,7 @@
 
 {% if series.about %}<p id="about">{{ series.about }}</p>{% endif %}
 
-{% if pager %}
+{% if talks %}
   <table>
   <tr>
     <th>Title</th>
@@ -17,7 +17,7 @@
     <th>Summary</th>
     <th>Date</th>
   </tr>
-    {% for talk in pager %}
+    {% for talk in talks %}
     <tr>
       <td><a href="{{ talk.url }}">{{ talk }}</a></td>
       <td><a href="{{ talk.url }}/embed" rel="facebox">Play</a></td>
@@ -26,7 +26,6 @@
     </tr>
     {% endfor %}
   </ul>
-  {% include "snippets/pager_navigation.html" %}
 {% else %}
   <p>There are no talks in this series.</p>
 {% endif %}
