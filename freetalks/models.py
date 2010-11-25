@@ -71,13 +71,19 @@ class Talk(db.Model):
 
     @property
     def url(self):
-        return '%s/%s' % (self.series.url, self.key().id())
+        return '%s/%s' % (self.series.url, self.series_order)
 
     @property
     def media(self):
         if not hasattr(self, '_media'):
             self._media = media.get(self.source)
         return self._media
+
+    @staticmethod
+    def get_by_slug_order(slug, order):
+        series = Series.all().filter('slug =', slug).get()
+        if series:
+            return Talk.all().filter('series =', series).filter('series_order =', int(order)).get()
 
     def clean(self):
         pass
