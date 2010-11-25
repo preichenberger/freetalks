@@ -1,10 +1,16 @@
 import re
+import datetime
 
 SERIES_NAME = r'[a-zA-Z]{1}[a-zA-Z0-9_-]*'
 
 SERIES_NAME_RE = re.compile(SERIES_NAME)
 SLUGIFY_STRIP_RE = re.compile(r'[^\w\s-]')
 SLUGIFY_HYPHENATE_RE = re.compile(r'[-\s]+')
+
+def jsonify(value):
+    if isinstance(value, datetime.datetime):
+        return value.isoformat().split('.')[0]
+    return value
 
 def slugify(value):
     """

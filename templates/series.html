@@ -14,14 +14,14 @@
   <tr>
     <th>Title</th>
     <th></th>
-    <th>Summary</th>
+    <th>Presenter(s)</th>
     <th>Date</th>
   </tr>
     {% for talk in talks %}
     <tr>
       <td><a href="{{ talk.url }}">{{ talk }}</a></td>
       <td><a href="{{ talk.url }}/embed" rel="facebox">Play</a></td>
-      <td>{{ talk.summary|default_if_none:"" }}</td>
+      <td>{{ talk.presenters|join:", " }}</td>
       <td>{{ talk.created_date|timesince }}</td>
     </tr>
     {% endfor %}

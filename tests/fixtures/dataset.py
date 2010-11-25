@@ -1,6 +1,7 @@
 from google.appengine.ext import db
 from google.appengine.api.users import User
 from freetalks import models
+from freetalks.utils import media
 import datetime
 
 def clear_type(obj_type):
@@ -22,7 +23,7 @@ def setup():
         link='http://us.pycon.org/2010/conference/schedule/event/3/',
         tags=['python', 'PyCon'],
         date=datetime.datetime.today(),
-        source=['blip.tv\tAYHItEYC\t3264001'],
+        sources=[media.Source('bliptv', 'AYHItEYC', '3264001')],
         summary='Intro to PyCon 2010',
         created_user=user,
         updated_user=user,
@@ -32,7 +33,7 @@ def setup():
         presenters=['Aaron Huey'],
         tags=['python', 'america'],
         date=datetime.datetime.today(),
-        source=['ted\tAaronHuey_2010X\taaron_huey'],
+        sources=[media.Source('ted', 'AaronHuey_2010X', 'aaron_huey')],
         summary='A discussion on America and prisoners of war',
         created_user=user,
         updated_user=user,
@@ -42,7 +43,7 @@ def setup():
         presenters=['Gary Bernhardt'],
         tags=['python', 'ruby'],
         date=datetime.datetime.today(),
-        source=['vimeo\t9471538'],
+        sources=[media.Source('vimeo', '9471538')],
         summary='Noob fest',
         created_user=user,
         updated_user=user,
@@ -52,7 +53,7 @@ def setup():
         presenters=['Alex Martelli'],
         tags=['python'],
         date=datetime.datetime.today(),
-        source=['youtube\t0vJJlVBVTFg'],
+        sources=[media.Source('youtube', '0vJJlVBVTFg')],
         summary='Python has some patterns for design',
         created_user=user,
         updated_user=user,

@@ -8,6 +8,7 @@
   <h2>{{ talk.title }}</h2>
   <div id="embed">{{ talk.media.embed }}</div><br />
   {% if talk.summary %}<p id="summary">{{ talk.summary }}</p>{% endif %}
+  {% if talk.presenters %}<p id="presenters">By {{ talk.presenters|join:", " }}</p>{% endif %}
   <ul id="links">
     <li><a href="#embed" rel="facebox">Popup Player</a></li>
     <li><a href="{{ talk.media.link }}">Source</a></li>

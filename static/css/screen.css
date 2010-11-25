@@ -45,3 +45,9 @@ div.center-content {
   text-decoration: none;
   text-transform: lowercase;
 }
+
+th.smallest,
+td.smallest {
+  width: 1px;
+  white-space: nowrap;
+}
