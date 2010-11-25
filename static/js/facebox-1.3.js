@@ -276,14 +276,14 @@
     $('#facebox_overlay').hide().addClass("facebox_overlayBG")
       .css('opacity', $.facebox.settings.opacity)
       .click(function() { $(document).trigger('close.facebox') })
-      .fadeIn(200)
+      .fadeIn(0)
     return false
   }
 
   function hideOverlay() {
     if (skipOverlay()) return
 
-    $('#facebox_overlay').fadeOut(200, function(){
+    $('#facebox_overlay').fadeOut(0, function(){
       $("#facebox_overlay").removeClass("facebox_overlayBG")
       $("#facebox_overlay").addClass("facebox_hide")
       $("#facebox_overlay").remove()
@@ -298,7 +298,7 @@
 
   $(document).bind('close.facebox', function() {
     $(document).unbind('keydown.facebox')
-    $('#facebox').fadeOut(function() {
+    $('#facebox').fadeOut(0, function() {
       $('#facebox .content').removeClass().addClass('content')
       $('#facebox .loading').remove()
       $(document).trigger('afterClose.facebox')
